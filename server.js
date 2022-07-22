@@ -5,19 +5,19 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const glob = require("glob");
 const path = require("path");
-const { checkToken } = require("./controllers/middleware.controller");
+const { checkToken } = require("./middlewares/middleware.controller");
 let server = require("http").Server(app);
-// const { config } = require('./config/config');
+const { config } = require("./config/config");
 const { errorHandler } = require("./services/error.handler.service");
 //db connected
 mongoose.Promise = global.Promise;
-// const { dbName, dbPort, host } = config.db;
+const { dbName, user, pass } = config.db;
 const mongooseOption = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 };
 mongoose.connect(
-  "mongodb+srv://kyawzin:8a4DJzCQEdCYCACe@cluster0.8msix.mongodb.net/plaza?retryWrites=true&w=majority",
+  `mongodb+srv://${user}:${pass}@cluster0.8msix.mongodb.net/${dbName}?retryWrites=true&w=majority`,
   mongooseOption
 );
 
@@ -59,7 +59,6 @@ app.use((err, req, res, next) => {
   }
 });
 
-// app.use('/public', express.static('public'));
 app.use("/public", express.static(path.resolve(__dirname, "public")));
 app.use("/asset", express.static(path.join(__dirname, "asset")));
 // error handling
@@ -73,5 +72,8 @@ app.use(errorHandler);
 app.set("trust proxy", true);
 app.set("view engine", "ejs");
 server.listen(7003, () => {
-  console.log(`A NOde js API is listening in port `, process.env.PORT || 5000);
+  console.log(
+    `A Vouncher Api Start Running at port `,
+    process.env.PORT || 7003
+  );
 });

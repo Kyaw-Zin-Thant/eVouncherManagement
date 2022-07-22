@@ -30,6 +30,7 @@ const schema = {
   },
   status: {
     type: String,
+    default: "ACTIVE",
     enum: ["ACTIVE", "INACTIVE", "USED"],
   },
 };

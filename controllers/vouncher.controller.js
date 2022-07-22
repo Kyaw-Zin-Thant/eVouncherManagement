@@ -62,7 +62,9 @@ exports.createVouncherController = async (req, res, next) => {
 exports.detailVouncherController = async (req, res, next) => {
   try {
     const { vouncherId } = req.params;
-    const response = await detailVouncherService({ vouncherId });
+
+    const fileUrl = req.protocol + "://" + req.headers.host;
+    const response = await detailVouncherService({ vouncherId, fileUrl });
     res.json(response);
   } catch (error) {
     next(error);
@@ -72,11 +74,29 @@ exports.detailVouncherController = async (req, res, next) => {
 //update vouncher
 exports.updateVouncherController = async (req, res, next) => {
   try {
-    const { vouncherId, vehiclename, imei } = { ...req.params, ...req.body };
+    const {
+      vouncherId,
+      title,
+      description,
+      expiredDate,
+      amount,
+      paymethod,
+      paymethodDiscounts,
+      quantity,
+      buyType,
+      status,
+    } = { ...req.params, ...req.body };
     const response = await updateVouncherService({
       vouncherId,
-      vehiclename,
-      imei,
+      title,
+      description,
+      expiredDate,
+      amount,
+      paymethod,
+      paymethodDiscounts,
+      quantity,
+      buyType,
+      status,
     });
     res.json(response);
   } catch (error) {
@@ -87,8 +107,8 @@ exports.updateVouncherController = async (req, res, next) => {
 //delete vehicle
 exports.deleteVouncherController = async (req, res, next) => {
   try {
-    const { vehicleId } = req.params;
-    const response = await deleteVouncherService({ vehicleId });
+    const { vouncherId } = req.params;
+    const response = await deleteVouncherService({ vouncherId });
     res.json(response);
   } catch (error) {
     next(error);

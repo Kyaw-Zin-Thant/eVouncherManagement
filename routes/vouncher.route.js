@@ -1,31 +1,32 @@
 const express = require("express");
+const { vouncher } = require("../controllers/validator.controller");
 const {
-  getVehicleController,
-  createVehicleController,
-  detailVehicleController,
-  updateVehicleController,
-  deleteVehicleController,
+  getVouncherController,
+  createVouncherController,
+  detailVouncherController,
+  updateVouncherController,
+  deleteVouncherController,
 } = require("../controllers/vouncher.controller");
-const { checkApiKey } = require("../middlewares/middleware.controller");
+const { validate } = require("../middlewares/validate.middleware.controller");
 
 const router = express.Router();
 const baseURL = "/api/v1";
 
 /**
- * vehicle get & register
+ * vouncher get & register
  */
 router
   .route(`${baseURL}/vouncher`)
-  .get(checkApiKey, getVehicleController)
-  .post(checkApiKey, createVehicleController);
+  .get(getVouncherController)
+  .post(validate(vouncher), createVouncherController);
 /**
- * vehicle detail,update,delete
+ * vouncher detail,update,delete
  */
 router
   .route(`${baseURL}/vouncher/:vouncherId`)
-  .get(checkApiKey, detailVehicleController)
-  .put(checkApiKey, updateVehicleController)
-  .delete(checkApiKey, deleteVehicleController);
+  .get(detailVouncherController)
+  .put(updateVouncherController)
+  .delete(deleteVouncherController);
 exports.default = (app) => {
   app.use("/", router);
 };

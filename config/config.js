@@ -5,30 +5,24 @@ const envConfig = {
     port: 8080,
     db: {
       user: "kyawzin",
-      pass: "Bba?Dk=k:Jv{Q9S<A_e=G&b`h_b;[X?Z",
-      dbName: "vouncher",
-      host: "localhost",
-      dbPort: "8081",
+      pass: "8a4DJzCQEdCYCACe",
+      dbName: "vouncherSystem",
     },
   },
   development: {
     port: 7001,
     db: {
       user: "kyawzin",
-      pass: "Bba?Dk=k:Jv{Q9S<A_e=G&b`h_b;[X?Z",
-      dbName: "vouncher",
-      host: "127.0.0.1",
-      dbPort: "27017",
+      pass: "8a4DJzCQEdCYCACe",
+      dbName: "vouncherSystem",
     },
   },
   production: {
     port: 7001,
     db: {
-      user: "pte",
       user: "kyawzin",
-      pass: "Bba?Dk=k:Jv{Q9S<A_e=G&b`h_b;[X?Z",
-      dbName: "127.0.0.1",
-      dbPort: "27017",
+      pass: "8a4DJzCQEdCYCACe",
+      dbName: "vouncherSystem",
     },
   },
 };
